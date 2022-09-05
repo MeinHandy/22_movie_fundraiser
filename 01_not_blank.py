@@ -9,4 +9,5 @@ def not_blank(q):
             return answer
 
 
-name = not_blank("What is your name?: "); print("Hello {}".format(name))
+name = not_blank("What is your name?: ")
+print("Hello {}".format(name))

@@ -17,5 +17,4 @@ def seat_counter():
         available_seats -= 1
         print("Hello {}".format(name))
 
-
 seat_counter()
