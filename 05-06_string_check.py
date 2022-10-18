@@ -1,6 +1,7 @@
 # 01_not_blank
 available_seats = 150
-
+valid_snacks = ["popcorn", "m&ms", "pita chips", "orange juice", "water"]
+snack_list = []
 
 def not_blank(question):
     while True:  # loops indefinitely until an acceptable input is received
@@ -52,12 +53,12 @@ def string_checker(question, for_check):
     while not valid:
         answer = input(question).strip().lower()
         if answer in for_check:
-            valid = True
             return answer
         else:
-            print("Invalid Input, please answer Yes or No")
+            print("Invalid Input, please answer {}".format(for_check))
 
 
+# runs the following code until there are no more remaining seats
 while available_seats > 0:  # while loops the code when the available seats is more than 0
     print('There are {} seats remaining'.format(available_seats))  # prints the total number of remaining seats
     name = not_blank("What is your name?: ")  # uses the not_blank function so name is not blank
@@ -65,3 +66,16 @@ while available_seats > 0:  # while loops the code when the available seats is m
     age = age_check()
     total_cost = ticket_price(age)
     wants_snacks = string_checker("Do you want snacks for the movie? (Yes/No) ", ["yes", "no"])
+    if wants_snacks == "yes":
+        valid = False
+        while not valid:
+            try:
+                snack_count = int(input("How many snacks do you want? "))
+                valid = True
+            except ValueError:  # confirms snack number request is an integer
+                print("Please input a whole number")
+        for i in range(0, snack_count):
+            snack_list.append(string_checker("What snacks do you want? ", valid_snacks))
+        print("Snacks ordered are the following: {}".format(snack_list))
+    else:
+        print("No snacks ordered")
