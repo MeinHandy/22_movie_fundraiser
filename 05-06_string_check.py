@@ -57,6 +57,17 @@ def string_checker(question, for_check):
         else:
             print("Invalid Input, please answer {}".format(for_check))
 
+def snack_requester():
+    valid = False
+    while not valid:
+        try:
+            snack_count = int(input("How many snacks do you want? "))
+            valid = True
+        except ValueError:  # confirms snack number request is an integer
+            print("Please input a whole number")
+    for i in range(0, snack_count):
+        snack_list.append(string_checker("What snacks do you want? ", valid_snacks))
+    print("Snacks ordered are the following: {}".format(snack_list))
 
 # runs the following code until there are no more remaining seats
 while available_seats > 0:  # while loops the code when the available seats is more than 0
@@ -67,15 +78,6 @@ while available_seats > 0:  # while loops the code when the available seats is m
     total_cost = ticket_price(age)
     wants_snacks = string_checker("Do you want snacks for the movie? (Yes/No) ", ["yes", "no"])
     if wants_snacks == "yes":
-        valid = False
-        while not valid:
-            try:
-                snack_count = int(input("How many snacks do you want? "))
-                valid = True
-            except ValueError:  # confirms snack number request is an integer
-                print("Please input a whole number")
-        for i in range(0, snack_count):
-            snack_list.append(string_checker("What snacks do you want? ", valid_snacks))
-        print("Snacks ordered are the following: {}".format(snack_list))
+        snack_requester()
     else:
         print("No snacks ordered")
